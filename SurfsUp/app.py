@@ -96,11 +96,11 @@ def tobs():
 def trip1(start):
 
  # Returns the min, max, and average temperatures calculated from the given start date to the end of the dataset    
-    recent_date = session.query(Measurement.date).order_by(Measurement.date.desc()).first().date
-    last_year = dt.datetime.strptime(recent_date, "%Y-%m-%d") - dt.timedelta(days=365)
-    end = last_year.date()
+    end_date = session.query(Measurement.date).order_by(Measurement.date.desc()).first().date
+    last_year = dt.datetime.strptime(end_date, "%Y-%m-%d") - dt.timedelta(days=365)
+    start_date = last_year.date()
     trip_data = session.query(func.min(Measurement.tobs), func.avg(Measurement.tobs), func.max(Measurement.tobs)).\
-        filter(Measurement.date > end).all()
+        filter(Measurement.date >= start_date).all()
     trip = list(np.ravel(trip_data))
     return jsonify(trip)
 
@@ -109,11 +109,11 @@ def trip1(start):
 def trip2(start,end):
 
   # Returns the min, max, and average temperatures calculated from the given start date to the given end date  
-    recent_date = session.query(Measurement.date).order_by(Measurement.date.desc()).first().date
-    last_year = dt.datetime.strptime(recent_date, "%Y-%m-%d") - dt.timedelta(days=365)
-    end = last_year.date()
+    end_date = session.query(Measurement.date).order_by(Measurement.date.desc()).first().date
+    last_year = dt.datetime.strptime(end_date, "%Y-%m-%d") - dt.timedelta(days=365)
+    start_date = last_year.date()
     trip_data = session.query(func.min(Measurement.tobs), func.avg(Measurement.tobs), func.max(Measurement.tobs)).\
-        filter(Measurement.date <= recent_date).filter(Measurement.date >= end).all()
+        filter(Measurement.date <= end_date).filter(Measurement.date >= start_date).all()
     trip = list(np.ravel(trip_data))
     return jsonify(trip)
 
