@@ -1,5 +1,5 @@
 # sqlalchemy-challenge
-To help with trip planning, decided to do a climate analysis about the area. The following sections outline the steps neede to accomplish this task.
+To help with trip planning, decided to do a climate analysis about the area. The following sections outline the steps needed to accomplish this task.
 
 Part 1: Analyze and Explore the Climate Data
 In this section, used Python and SQLAlchemy to do a basic climate analysis and data exploration of climate database. Specifically, used SQLAlchemy ORM queries, Pandas, and Matplotlib. To do so, completed the following steps:
